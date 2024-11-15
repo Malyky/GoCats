@@ -22,3 +22,12 @@ func (r *CatRepository) List() (Cats, error) {
 
 	return cats, nil
 }
+
+func (r *CatRepository) Find(catName string) (Cat, error) {
+	var cat Cat
+	if err := r.db.First(&cat, "name= ?", catName).Error; err != nil {
+		return cat, err
+	}
+
+	return cat, nil
+}
